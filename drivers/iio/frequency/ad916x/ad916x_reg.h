@@ -19,7 +19,7 @@ int ad916x_register_write_tbl(ad916x_handle_t *h,
  * at the register 0x004. This might change with the
  * official part...
  */
-#define AD9166_PROD_ID_LSB			  0x00
+#define AD9166_PROD_ID_LSB			  0x66
 /*REGISTER SUMMARY : (AD916x_REGMAP_V4)*/
 #define AD916x_REG_IF_CFG_A                       0x000
 #define AD916x_REG_IF_CFG_B                       0x001

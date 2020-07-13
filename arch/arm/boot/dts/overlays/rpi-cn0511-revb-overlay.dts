@@ -20,7 +20,7 @@
 	fragment@1 {
 		target = <&spi0_cs_pins>;
 		frag0: __overlay__ {
-				brcm,pins = <27 22 17>;
+				brcm,pins = <8 7 25>;
 				brcm,function = <1>; //output
 		};
 	};
@@ -31,7 +31,7 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
-			cs-gpios = <&gpio 27 1>, <&gpio 22 1>, <&gpio 17 1>;
+			cs-gpios = <&gpio 8 1>, <&gpio 7 1>, <&gpio 25 1>;
 			status = "okay";
 
 			dac0_ad9166: ad9166@0 {
@@ -65,7 +65,7 @@
 				channel@0 {
 					reg = <0>;
 					adi,power-up-frequency = /bits/ 64
-								<5000000000>;
+								<5859240000>;
 				};
 			};
 
@@ -102,19 +102,6 @@
 			  <&frag1>,"cs-gpios:28";
 	};
 
-	fragment@5 {
-		target-path = "/";
-		__overlay__ {
-			vref: fixedregulator@0 {
-				compatible = "regulator-fixed";
-				regulator-name = "fixed-supply";
-				regulator-min-microvolt = <2500000>;
-				regulator-max-microvolt = <2500000>;
-				regulator-boot-on;
-			};
-		};
-	};
-
 	fragment@6 {
 		target = <&i2c1>;
 		__overlay__ {
@@ -124,9 +111,9 @@
 
 			ad5696r@4c {
 				compatible = "adi,ad5693r";
-				clock-frequency = <400000>
+				clock-frequency = <400000>;
 				reg = <0x4c>;
-				vcc-supply = <&vref>;
+				adi,vout-raw = <43254>;
 			};
 		};
 	};

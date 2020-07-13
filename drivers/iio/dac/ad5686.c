@@ -437,7 +437,7 @@ int ad5686_probe(struct device *dev,
 	unsigned int val, ref_bit_msk;
 	u8 cmd;
 	int ret, i, voltage_uv = 0;
-
+	u32 voltage_raw_init = 0;
 	indio_dev = devm_iio_device_alloc(dev, sizeof(*st));
 	if (indio_dev == NULL)
 		return  -ENOMEM;
@@ -510,7 +510,11 @@ int ad5686_probe(struct device *dev,
 	ret = st->write(st, cmd, 0, !!val);
 	if (ret)
 		goto error_disable_reg;
-
+	device_property_read_u32(dev, "adi,vout-raw",&voltage_raw_init);
+	printk(KERN_INFO "AD5696 Initial voltage output set to: %d", voltage_raw_init & 0xFFFF);
+	ret = st->write(st, AD5686_CMD_WRITE_INPUT_N_UPDATE_N, 0, voltage_raw_init & 0xFFFF);
+	if (ret)
+		goto error_disable_reg;
 	ret = iio_device_register(indio_dev);
 	if (ret)
 		goto error_disable_reg;
