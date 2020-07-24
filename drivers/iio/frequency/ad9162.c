@@ -301,7 +301,12 @@ static int ad9162_setup(struct ad9162_state *st)
 	ret = ad916x_dac_set_clk_frequency(ad916x_h, dac_rate_Hz);
 	if (ret != 0)
 		return ret;
-
+// Temporary only - kit
+	//enable FIR at start
+	ret = ad916x_fir85_set_enable(ad916x_h, 1);
+	//Set default NCO freq to 500Mhz
+	ret = ad916x_nco_set(ad916x_h, 0, 500000000ul, 0, 0);
+// end of temporary
 	/* check for dc test mode */
 	if (device_property_read_bool(dev, "adi,dc-test-en"))
 		st->dc_test_mode = true;
@@ -793,6 +798,7 @@ static int ad916x_standalone_probe(struct ad9162_state *st)
 	}
 
 	iio_device_set_drvdata(indio_dev, &st->conv);
+
 
 	return 0;
 }
