@@ -600,6 +600,8 @@ ADI_API int ad916x_dc_test_set_mode(ad916x_handle_t *h,
 		return err;
 	}
 	switch(tmp_reg) {
+        /* Retained 0x00 for compatibility of AD9166 si rev 3. */
+		case 0x00:
 		case AD9162_PROD_ID_LSB:
 		case AD9166_PROD_ID_LSB:
 			break;
@@ -648,6 +650,8 @@ ADI_API int ad916x_dc_test_get_mode(ad916x_handle_t *h,
 		return err;
 	}
 	switch(tmp_reg) {
+        /* Retained 0x00 for compatibility of AD9166 si rev 3. */
+		case 0x00:
 		case AD9162_PROD_ID_LSB:
 		case AD9166_PROD_ID_LSB:
 			break;

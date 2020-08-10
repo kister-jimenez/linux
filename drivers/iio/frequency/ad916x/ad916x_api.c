@@ -64,6 +64,11 @@ struct ad916x_reg_data ADI_RECOMMENDED_INIT_TBL[] = {
 	{0x090, 0x1E}, /*Power up the DACCLK DLL*/
 	{0x080, 0x00}, /*Enable the Clock Receiver*/
 	{0x040, 0x00}, /*Enable the DAC BIAS circuits*/
+	{0x093, 0x00}, /*ADI INTERNAL: Configure DACCLK DLL*/
+	{0x094, 0x00}, /*ADI INTERNAL: Configure DACCLK DLL*/
+	{0x095, 0x80}, /*ADI INTERNAL: Configure DACCLK DLL*/
+	{0x096, 0x0D}, /*ADI INTERNAL: Configure DACCLK DLL*/
+	{0x097, 0x10}, /*ADI INTERNAL: Configure DACCLK DLL*/
 	{0x09E, 0x85}, /*ADI INTERNAL: Configure DACCLK DLL*/
 	{0x091, 0xE9}, /*Enable DACCLK DLL*/
 	{0x0E8, 0x20} /*ADI INTERNAL: Enable Calibration Factors*/
@@ -117,7 +122,7 @@ static int dac_init_sequence(ad916x_handle_t *h)
 	if (err != API_ERROR_OK) {
 		return err;
 	}
-	if (chip_id.dev_revision == AD916x_REL_SI_REV) {
+	if (chip_id.dev_revision >= AD916x_REL_SI_REV) {
 		/*Final Silicon Configuration*/
 		err = ad916x_register_write_tbl(h, &ADI_RECOMMENDED_INIT_TBL[0],
 						ARRAY_SIZE(ADI_RECOMMENDED_INIT_TBL));
