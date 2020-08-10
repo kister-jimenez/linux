@@ -65,7 +65,7 @@
 				channel@0 {
 					reg = <0>;
 					adi,power-up-frequency = /bits/ 64
-								<5000000000>;
+								<5038080000>;
 				};
 			};
 
@@ -100,5 +100,20 @@
 			  <&frag1>,"cs-gpios:16";
 		cs2_pin = <&frag0>,"brcm,pins:8",
 			  <&frag1>,"cs-gpios:28";
+	};
+
+	fragment@5 {
+		target = <&i2c1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			ad5696r@4c {
+				compatible = "adi,ad5693r";
+				clock-frequency = <400000>;
+				reg = <0x4c>;
+			};
+		};
 	};
 };
