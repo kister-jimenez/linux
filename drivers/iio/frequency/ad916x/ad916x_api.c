@@ -54,6 +54,7 @@ struct ad916x_reg_data ADI_RECOMMENDED_ES_INIT_TBL[] = {
 	{0x093, 0x00}, /*ADI INTERNAL: Configure DACCLK DLL*/
 	{0x094, 0x00}, /*ADI INTERNAL: Configure DACCLK DLL*/
 	{0x096, 0x0D}, /*ADI INTERNAL: Configure DACCLK DLL*/
+	{0x097, 0x19}, /*ADI INTERNAL: Configure DACCLK DLL*/
 	{0x09E, 0x85}, /*ADI INTERNAL: Configure DACCLK DLL*/
 	{0x091, 0xE9}, /*Enable DACCLK DLL*/
 	{0x0E8, 0x20} /*ADI INTERNAL: Enable Calibration Factors*/
